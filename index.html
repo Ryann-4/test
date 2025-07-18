@@ -1,53 +1,100 @@
 <html>
   <head>
-    <title>
-      test flashcards
-    </title>
+    <title>Test Flashcards</title>
     <style>
       body {
-        background:black;
+        background: black;
+        color: white;
+        font-family: Arial, sans-serif;
+      }
       div {
-        background:green;
-        border-radius:50px;
-        height:60vh;
-        width:60vh;
-        border:1px solid white;
-        margin-top:20vh;
-        margin-bottom:20vh;
+        background: green;
+        border-radius: 50px;
+        height: 60vh;
+        width: 60vh;
+        border: 1px solid white;
+        margin-top: 20vh;
+        margin-bottom: 20vh;
+        cursor: pointer;
+        overflow: hidden;
+        position: relative;
       }
       div .card {
-        display:none;
+        display: none;
       }
       div:hover .card {
-        display:block;
+        display: block;
       }
       .card {
-        border:inherit;
-        border-radius:inherit;
-        text-align:center;
-        height:60vh;
-        width:60vh;
-        background:blue;
-        margin-top:0px;
+        border: inherit;
+        border-radius: inherit;
+        text-align: center;
+        height: 60vh;
+        width: 60vh;
+        background: blue;
+        margin-top: 0;
+        padding: 20px;
+        box-sizing: border-box;
       }
       .crd {
-        display:block;
-        text-align:center;
+        display: block;
+        text-align: center;
+        padding: 20px;
+        box-sizing: border-box;
       }
       div:hover .crd {
-        display:none;
+        display: none;
       }
-      div:active  .crd {
-        display:block;
+      div:active .crd {
+        display: block;
       }
     </style>
   </head>
   <body>
     <center>
-    <div>
-      <p class="crd">Q: Who Was Tho Only President Born IN Iowa?</p>
-      <p class="card"> <br>A: Herbert Hoover!</p>
-    </div>
+      <div id="flashcard">
+        <p class="crd" id="question">Q: Who Was The Only President Born in Iowa?</p>
+        <p class="card" id="answer">A: Herbert Hoover!</p>
+      </div>
     </center>
+
+    <script>
+      const flashcard = document.getElementById('flashcard');
+      const questionEl = document.getElementById('question');
+      const answerEl = document.getElementById('answer');
+
+      // Array of flashcards
+      const cards = [
+        { q: "Who Was The Only President Born in Iowa?", a: "Herbert Hoover!" },
+        { q: "What is the capital of France?", a: "Paris." },
+        { q: "What is the largest planet in our solar system?", a: "Jupiter." },
+        { q: "Who wrote 'Romeo and Juliet'?", a: "William Shakespeare." },
+        { q: "What is the chemical symbol for water?", a: "H₂O." },
+        { q: "How many continents are there?", a: "7." },
+        { q: "Who painted the Mona Lisa?", a: "Leonardo da Vinci." },
+        { q: "What is the fastest land animal?", a: "The cheetah." },
+        { q: "What is 9 x 9?", a: "81." },
+        { q: "Which planet is known as the Red Planet?", a: "Mars." },
+        { q: "Who discovered gravity?", a: "Isaac Newton." },
+        { q: "What is the tallest mountain on Earth?", a: "Mount Everest." },
+        { q: "Who invented the light bulb?", a: "Thomas Edison." },
+        { q: "What is the largest ocean on Earth?", a: "The Pacific Ocean." },
+        { q: "What is the currency of Japan?", a: "Yen." }
+      ];
+
+      let currentIndex = 0;
+
+      // Function to load current card
+      function loadCard(index) {
+        questionEl.textContent = "Q: " + cards[index].q;
+        answerEl.textContent = "A: " + cards[index].a;
+      }
+
+      // Double-click event to go to next card
+      flashcard.addEventListener('dblclick', () => {
+        currentIndex = (currentIndex + 1) % cards.length;
+        loadCard(currentIndex);
+      });
+    </script>
   </body>
 </html>
