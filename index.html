@@ -7,7 +7,7 @@
         color: white;
         font-family: Arial, sans-serif;
       }
-      div {
+      #flashcard {
         background: green;
         border-radius: 50px;
         height: 60vh;
@@ -16,45 +16,29 @@
         margin-top: 20vh;
         margin-bottom: 20vh;
         cursor: pointer;
-        overflow: hidden;
         position: relative;
-      }
-      div .card {
-        display: none;
-      }
-      div:hover .card {
-        display: block;
-      }
-      .card {
-        border: inherit;
-        border-radius: inherit;
         text-align: center;
-        height: 60vh;
-        width: 60vh;
-        background: blue;
-        margin-top: 0;
+        overflow: hidden;
         padding: 20px;
         box-sizing: border-box;
       }
-      .crd {
+      #question {
+        font-size: 1.5em;
+        margin: 0;
         display: block;
-        text-align: center;
-        padding: 20px;
-        box-sizing: border-box;
       }
-      div:hover .crd {
-        display: none;
-      }
-      div:active .crd {
-        display: block;
+      #answer {
+        font-size: 1.3em;
+        margin-top: 20px;
+        display: none; /* Hidden until clicked */
       }
     </style>
   </head>
   <body>
     <center>
       <div id="flashcard">
-        <p class="crd" id="question">Q: Who Was The Only President Born in Iowa?</p>
-        <p class="card" id="answer">A: Herbert Hoover!</p>
+        <p id="question">Q: Who Was The Only President Born in Iowa?</p>
+        <p id="answer">A: Herbert Hoover!</p>
       </div>
     </center>
 
@@ -63,7 +47,6 @@
       const questionEl = document.getElementById('question');
       const answerEl = document.getElementById('answer');
 
-      // Array of flashcards
       const cards = [
         { q: "Who Was The Only President Born in Iowa?", a: "Herbert Hoover!" },
         { q: "What is the capital of France?", a: "Paris." },
@@ -83,18 +66,29 @@
       ];
 
       let currentIndex = 0;
+      let showingAnswer = false;
 
-      // Function to load current card
       function loadCard(index) {
         questionEl.textContent = "Q: " + cards[index].q;
         answerEl.textContent = "A: " + cards[index].a;
+        answerEl.style.display = "none";
+        showingAnswer = false;
       }
 
-      // Double-click event to go to next card
-      flashcard.addEventListener('dblclick', () => {
-        currentIndex = (currentIndex + 1) % cards.length;
-        loadCard(currentIndex);
+      flashcard.addEventListener('click', () => {
+        if (!showingAnswer) {
+          // Show answer
+          answerEl.style.display = "block";
+          showingAnswer = true;
+        } else {
+          // Move to next question
+          currentIndex = (currentIndex + 1) % cards.length;
+          loadCard(currentIndex);
+        }
       });
+
+      // Load the first card initially
+      loadCard(currentIndex);
     </script>
   </body>
 </html>
