@@ -4,11 +4,13 @@
       test flashcards
     </title>
     <style>
+      body {
+        background:black;
       div {
         background:green;
+        border-radius:50px;
         height:60vh;
         width:60vw;
-        justify-content:center;
         border:1px solid white;
         margin-top:20vh;
         margin-bottom:20vh;
@@ -33,16 +35,20 @@
       }
       .crd {
         display:block;
+        text-align:center;
       }
       div:hover .crd {
         display:none;
+      }
+      div:active  .crd {
+        display:block;
       }
     </style>
   </head>
   <body>
     <div>
       <p class="crd">Q: Who Was Tho Only President Born IN Iowa?</p>
-      <p class="card">A: Herbert Hoover!</p>
+      <p class="card"> <br>A: Herbert Hoover!</p>
     </div>
   </body>
 </html>
